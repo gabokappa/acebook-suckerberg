@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature "User editing posts ", type: :feature do
-  scenario "User cannot edit another user's post" do
+RSpec.feature "User deletes other posts ", type: :feature do
+  scenario "User cannot delete another user's post" do
     user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
     visit "/posts"
@@ -13,7 +13,7 @@ RSpec.feature "User editing posts ", type: :feature do
     user2 = FactoryBot.create(:user)
     login_as(user2, :scope => :user)
     visit "/posts"
-    click_link 'Edit'
-    expect(page).to have_content("ERROR: only the author can edit the post")
+    click_link 'Delete'
+    expect(page).to have_content("ERROR: only the author can delete this post")
   end
 end
