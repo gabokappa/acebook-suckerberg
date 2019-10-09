@@ -26,18 +26,22 @@ class PostsController < ApplicationController
     a = params[:id]
     @post = Post.find_by(id: a)
     if current_user.id == @post.user_id
-    @post.update(post_params)
-    redirect_to posts_url
-  else
-    redirect_to posts_url
-    flash[:notice] = "ERROR: only the author can edit the post"
-  end
+      @post.update(post_params)
+      redirect_to posts_url
+    else
+      redirect_to posts_url
+      flash[:notice] = "ERROR: only the author can edit the post"
+    end
   end
 
   def show
     a = params[:id]
     @post = Post.find_by(id: a)
-    @post.destroy
+    if current_user.id == @post.user_id
+      @post.destroy
+    else
+      flash[:notice] = "ERROR: only the author can delete this post"
+    end
     redirect_to posts_url
   end
 
