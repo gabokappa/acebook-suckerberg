@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     if current_user.id != @post.user_id
-      flash[:notice] = "You can't edit this message"
+      flash[:notice] = "This MESSAGE isn't yours!"
       redirect_to posts_url
     end
   end
@@ -25,14 +25,13 @@ class PostsController < ApplicationController
   def update
     a = params[:id]
     @post = Post.find_by(id: a)
-
-    if current_user.id != @post.user_id
-      flash[:notice] = "You can't edit this message"
-      redirect_to posts_url
-    end
-
+    if current_user.id == @post.user_id
     @post.update(post_params)
     redirect_to posts_url
+  else
+    redirect_to posts_url
+    flash[:notice] = "This message isn't yours!"
+  end
   end
 
   def show
@@ -45,6 +44,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:message)
+    params.require(:post).permit(:message).merge(user_id: current_user.id)
   end
 end

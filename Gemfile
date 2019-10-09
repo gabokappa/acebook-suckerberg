@@ -41,6 +41,7 @@ group :development, :test do
   gem 'rubocop', '~> 0.75.0', require: false
   gem 'travis'
   gem "factory_bot_rails"
+  gem "timecop"
 end
 
 group :development do
