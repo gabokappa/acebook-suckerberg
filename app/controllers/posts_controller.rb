@@ -11,6 +11,7 @@ class PostsController < ApplicationController
   end
 
   def index
+    p @user
     @posts = Post.all
   end
 
@@ -31,7 +32,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: a)
     @post.destroy
     redirect_to posts_url
-  end 
+  end
 
   private
 
