@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Timeline", type: :feature do
+feature "Timeline", type: :feature do
   scenario "Can submit posts and view them" do
     user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
