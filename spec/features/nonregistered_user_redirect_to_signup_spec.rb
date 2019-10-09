@@ -7,6 +7,6 @@ feature 'non regisered user goes to sig up' do
     login_as(user, :scope => :user)
     logout(:user)
     visit '/posts'
-    expect(page).to have_current_path('/users/sign_in')
+    expect(page).to have_current_path('/user/sign_in')
   end
 end
