@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Post Edit", type: :feature do
+feature "Post Edit", type: :feature do
   scenario "Can edit posts and view them" do
     user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
