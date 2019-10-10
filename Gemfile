@@ -42,6 +42,7 @@ group :development, :test do
   gem 'travis'
   gem 'factory_bot_rails'
   gem 'timecop'
+  gem 'database_cleaner'
 end
 
 group :development do

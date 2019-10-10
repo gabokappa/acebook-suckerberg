@@ -1,10 +1,18 @@
 FactoryBot.define do
+
   factory :like do
     liked { 1 }
   end
 
   factory :comment do
     message { "MyString" }
+    user_id {FactoryBot.create(:user).id}
+    post_id {FactoryBot.create(:post).id}
+  end
+
+  factory :post do
+    message { "MyString" }
+    user_id {FactoryBot.create(:user).id}
   end
 
   factory :user do

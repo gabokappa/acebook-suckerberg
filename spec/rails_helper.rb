@@ -17,11 +17,11 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
 end
 
-RSpec.configure do |config|
- config.after :each do
-   Warden.test_reset!
- end
-end
+# # RSpec.configure do |config|
+# #  config.after :each do
+# #    Warden.test_reset!
+# #  end
+# end
 # require 'test_database_helper'
 # Add additional requires below this line. Rails is not loaded until this point!
 # comment
