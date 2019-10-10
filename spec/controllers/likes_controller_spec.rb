@@ -11,14 +11,24 @@ describe LikesController, type: :controller do
 
   describe "POST /" do
     login_user
-    it "creates a like" do
-      post :create, params: { like: { liked: 1 } }
-      p @like
-      p Like.all
-      p Like.all[0]
-      # expect(Like.all[0]).to be
-      expect(Like.find_by(liked: 1)).to be
-
+    it "creates a like for a post" do
+      new_post = FactoryBot.create(:post)
+      # p new_post
+      post :create, params: { like: { liked: 1 , post_id: new_post.id}} #, post_id: new_post.id } }#, post_id: post.id }#, post_id: post.id, comment_id: comment.id } }
+      # p Like.all[0]
+      expect(Like.all[0]).to be
+      DatabaseCleaner.clean
+    end
+  end
+  describe "POST /" do
+    login_user
+    it "creates a like for a comment" do
+      new_comment = FactoryBot.create(:comment)
+      # p new_comment
+      post :create, params: { like: { liked: 1 , comment_id: new_comment.id}} #, post_id: new_post.id } }#, post_id: post.id }#, post_id: post.id, comment_id: comment.id } }
+      # p Like.all[0]
+      expect(Like.all[0]).to be
+      DatabaseCleaner.clean
     end
   end
 end

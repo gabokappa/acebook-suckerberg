@@ -7,6 +7,9 @@ class PostsController < ApplicationController
   def create
     # puts post_params['message'].encode('utf-8')
     @post = Post.create(post_params)
+    # like = Like.create({liked: 1, post_id: @post.id, user_id: current_user.id})
+    # p like.save
+    # p Like.all
     redirect_to posts_url
   end
 
