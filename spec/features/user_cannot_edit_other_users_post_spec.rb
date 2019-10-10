@@ -9,11 +9,10 @@ RSpec.feature "User editing posts ", type: :feature do
     fill_in "Message", with: "Hello, world!"
     click_button "Submit"
     click_link "Logout"
-
     user2 = FactoryBot.create(:user)
     login_as(user2, :scope => :user)
     visit "/posts"
     click_link 'Edit'
-    expect(page).to have_content("ERROR: only the author can edit the post")
+    expect(page).to have_content("ERROR")
   end
 end

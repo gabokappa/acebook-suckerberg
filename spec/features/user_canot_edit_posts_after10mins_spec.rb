@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Post not able to delete after 600 seconds limit", type: :feature do
+feature "Post not able to edit after 600 seconds limit", type: :feature do
   scenario "Can delete posts" do
     user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
@@ -12,7 +12,9 @@ feature "Post not able to delete after 600 seconds limit", type: :feature do
     Timecop.travel(Time.now + 601)
     login_as(user, :scope => :user)
     visit "/posts"
-    click_link "Delete"
+    click_link "Edit"
+    expect(page).to have_content('ERROR')
     expect(page).to have_content('Hello, friends!')
+
   end
 end
