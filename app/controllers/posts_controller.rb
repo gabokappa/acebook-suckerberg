@@ -16,24 +16,21 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    # redirect_to edit_post_url
+    if current_user.id != @post.user_id
+      flash[:notice] = "ERROR: only the author can edit the post"
+      redirect_to posts_url
+    end
   end
 
   def update
-    a = params[:id]
-    @post = Post.find_by(id: a)
-    @post.update(post_params)
+    flash_the_notice = flash[:notice] = "ERROR: only the author can edit the post"
+    authored_by_user?(params[:id]) ? @post.update(post_params) : flash_the_notice
     redirect_to posts_url
   end
 
   def show
-    a = params[:id]
-    @post = Post.find_by(id: a)
-    if time_difference
-      then @post.destroy
-    else
-      flash[:notice] = 'You were too late! Delete faster (10 mins limit)!'
-    end
+    flash_the_notice = flash[:notice] = "ERROR: only the author can delete this post"
+    authored_by_user?(params[:id]) ? @post.destroy : flash_the_notice
     redirect_to posts_url
   end
 
@@ -45,6 +42,12 @@ class PostsController < ApplicationController
 
 
   def post_params
-    params.require(:post).permit(:message)
+    params.require(:post).permit(:message).merge(user_id: current_user.id)
   end
+
+  def authored_by_user?(params_id)
+    @post = Post.find_by(id: params_id)
+  current_user.id == @post.user_id ? true : false
+  end
+
 end
