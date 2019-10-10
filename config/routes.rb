@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :user, controllers: { sessions: 'users/sessions' } 
+  devise_for :user, controllers: { sessions: 'users/sessions' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # root to: "home#index"
@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   end
 
   resources :posts
+    resources :comments
+
 end
