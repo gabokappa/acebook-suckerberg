@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'test_database_helper'
 
-RSpec.feature "Posts show date", type: :feature do
+feature "Posts show date", type: :feature do
   scenario "shows the date" do
     user = FactoryBot.create(:user)
     login_as(user, :scope => :user)

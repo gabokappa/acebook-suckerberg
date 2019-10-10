@@ -36,6 +36,11 @@ class PostsController < ApplicationController
 
   private
 
+  def time_difference
+    Time.now - @post.created_at <= 600
+  end
+
+
   def post_params
     params.require(:post).permit(:message).merge(user_id: current_user.id)
   end

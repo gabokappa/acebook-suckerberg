@@ -7,6 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   GET /resource/sign_up
   def new
     super
+    user.confirm
   end
 
 
@@ -14,24 +15,25 @@ POST /resource
   def create
     super do |resource|
       BackgroundWorker.trigger(resource)
+    user.confirm
   end
 end
 
 
-  # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  GET /resource/edit
+  def edit
+    super
+  end
 
-  # PUT /resource
-  # def update
-  #   super
-  # end
+  PUT /resource
+  def update
+    super
+  end
 
-  # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  DELETE /resource
+  def destroy
+    super
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
