@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :like do
+    liked { 1 }
+  end
+
   factory :comment do
     message { "MyString" }
   end
