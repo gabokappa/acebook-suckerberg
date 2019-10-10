@@ -14,6 +14,8 @@ RSpec.feature "User deletes other posts ", type: :feature do
     login_as(user2, :scope => :user)
     visit "/posts"
     click_link 'Delete'
-    expect(page).to have_content("ERROR: only the author can delete this post")
+    expect(page).to have_content('ERROR: only the author can delete this post')
+    expect(page).to have_content('Hello, world!')
+
   end
 end
