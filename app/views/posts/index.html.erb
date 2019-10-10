@@ -14,6 +14,10 @@
 
     <%= link_to post_path(post.id) do %>
       Delete
+    <% end %>&emsp;
+
+    <%= link_to new_comment_path(post_id: post.id) do %>
+      Comment
     <% end %>
 
 
