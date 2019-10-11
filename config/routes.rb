@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     root 'devise/sessions#new'
   end
+  get 'destroy_post', to: 'posts#destroy_post', as: :destroy_post
 
   resources :posts
     resources :comments
