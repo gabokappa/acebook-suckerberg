@@ -23,13 +23,13 @@
     <%= link_to likeposts_path(post_id: post.id) do %>
       Like
     <% end %>
-  <br></br>
+  <br><br>
 Comments:
 <% @comments = Comment.where(post_id: post.id) %>
   <ul>
   <% @comments.each do |comment| %>
 
-      <li><%=comment.message %></li>
+      <li><%=comment.message %> </li>
     <% end %>
     </ul>
 
