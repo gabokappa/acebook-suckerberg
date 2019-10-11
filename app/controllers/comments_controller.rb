@@ -22,12 +22,14 @@ class CommentsController < ApplicationController
       flash[:notice] = 'ERROR: only the author can edit the comment'
       redirect_to posts_url
     end
+    if too_much_time_elapsed
+      flash[:notice] = 'ERROR: You were too late! Update faster (10 mins limit)!'
+      redirect_to posts_url
+    end
   end
 
   def update
-    @comment = Comment.find_by(id: params[:id])
-    @post_id = @comment.post_id
-    @comment.update(comment_params)
+    authored_by_user?(params[:id]) ? @comment.update(comment_params) : flash[:notice] = 'ERROR: only the author can edit the comment'
     redirect_to posts_url
   end
 
@@ -38,7 +40,12 @@ class CommentsController < ApplicationController
 
   def authored_by_user?(params_id)
     @comment = Comment.find_by(id: params_id)
+    @post_id = @comment.post_id
     current_user.id == @comment.user_id ? true : false
+  end
+
+  def too_much_time_elapsed
+    Time.now - @comment.created_at > 600
   end
 
 end
