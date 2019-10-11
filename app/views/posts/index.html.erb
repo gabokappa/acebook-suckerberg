@@ -21,14 +21,15 @@
     <% end %>&emsp;
 
     <%= link_to likeposts_path(post_id: post.id) do %>
-      Like
+      <%= Emoji.find_by_alias("+1").raw %>
     <% end %>
+    <%= @likes_posts[post.id] %>
+
   <br><br>
 Comments:
 <% @comments = Comment.where(post_id: post.id) %>
   <ul>
   <% @comments.each do |comment| %>
-
       <li><%=comment.message %>
         <%= link_to edit_comment_path(comment.id) do %>
           Edit comment
@@ -37,9 +38,14 @@ Comments:
           Delete comment
           <% end %>&emsp;
       </li>
-    <% end %>
-    </ul>
+    <%= link_to likecomments_path(comment_id: comment.id) do %>
+      <%= Emoji.find_by_alias("metal").raw %>
 
+    <% end %>
+    <%= @likes_comments[comment.id] %>
+    </li>
+    </ul>
+    <% end %>
 <% end %>
 
 <style>

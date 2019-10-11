@@ -10,12 +10,20 @@ class LikesController < ApplicationController
   end
 
   def create_no_form_posts
-    @like = Like.create({ liked: 1 , post_id: params[:post_id], user_id: current_user.id})
+    if Like.all.where(post_id: params[:post_id], user_id: current_user.id).length == 0
+      @like = Like.create({ liked: 1 , post_id: params[:post_id], user_id: current_user.id})
+    else
+       Like.all.where(post_id: params[:post_id], user_id: current_user.id).destroy_all
+     end
     redirect_to posts_url
   end
 
   def create_no_form_comments
-    @like = Like.create({ liked: 1 , comment_id: params[:comment_id], user_id: current_user.id})
+    if Like.all.where(comment_id: params[:comment_id], user_id: current_user.id).length == 0
+      @like = Like.create({ liked: 1 , comment_id: params[:comment_id], user_id: current_user.id})
+    else
+       Like.all.where(comment_id: params[:comment_id], user_id: current_user.id).destroy_all
+     end
     redirect_to posts_url
   end
 
