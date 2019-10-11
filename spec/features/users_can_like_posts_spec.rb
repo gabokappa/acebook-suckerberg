@@ -11,7 +11,13 @@ feature "Likes", type: :feature do
     click_link 'New post'
     fill_in "Message", with: "Goodbye, world!"
     click_button "Submit"
-    click_link('Like', :match => :first)
-    expect(page).to have_content('Likes: 1')
+    click_link("#{ Emoji.find_by_alias("+1").raw }", :match => :first)
+    expect(page).to have_content("#{ Emoji.find_by_alias("+1").raw } 1")
+    user2 = FactoryBot.create(:user)
+    login_as(user2, :scope => :user)
+    visit "/posts"
+    click_link("#{ Emoji.find_by_alias("+1").raw }", :match => :first)
+    expect(page).to have_content("#{ Emoji.find_by_alias("+1").raw } 2")
+
   end
 end
