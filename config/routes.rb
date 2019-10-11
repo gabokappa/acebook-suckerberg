@@ -11,7 +11,10 @@ Rails.application.routes.draw do
     root 'devise/sessions#new'
   end
 
+  get 'likeposts', to: 'likes#create_no_form_posts', as: :likeposts
+  get 'likecomments', to: 'likes#create_no_form_comments', as: :likecomments
+    
   resources :posts
-    resources :comments
+  resources :comments
   resources :likes
 end

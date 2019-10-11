@@ -5,7 +5,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    # puts post_params['message'].encode('utf-8')
     @post = Post.create(post_params)
     # like = Like.create({liked: 1, post_id: @post.id, user_id: current_user.id})
     # p like.save
@@ -30,7 +29,6 @@ class PostsController < ApplicationController
   end
 
   def update
-
     authored_by_user?(params[:id]) ? @post.update(post_params) : flash[:notice] = "ERROR: only the author can edit the post"
     redirect_to posts_url
   end
