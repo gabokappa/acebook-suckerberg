@@ -37,7 +37,6 @@ Comments:
         <%= link_to destroy_comment_path(id: comment.id) do %>
           Delete comment
           <% end %>&emsp;
-      </li>
     <%= link_to likecomments_path(comment_id: comment.id) do %>
       <%= Emoji.find_by_alias("metal").raw %>
 
