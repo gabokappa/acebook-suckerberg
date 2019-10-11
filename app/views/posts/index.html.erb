@@ -31,7 +31,11 @@ Comments:
   <ul>
   <% @comments.each do |comment| %>
 
-      <li><%=comment.message %> </li>
+      <li><%=comment.message %>
+        <%= link_to edit_comment_path(comment.id) do %>
+          Edit comment
+          <% end %>&emsp;
+      </li>
     <% end %>
     </ul>
 
