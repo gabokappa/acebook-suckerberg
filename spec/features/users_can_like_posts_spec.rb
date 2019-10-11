@@ -18,6 +18,5 @@ feature "Likes", type: :feature do
     visit "/posts"
     click_link("#{ Emoji.find_by_alias("+1").raw }", :match => :first)
     expect(page).to have_content("#{ Emoji.find_by_alias("+1").raw } 2")
-
   end
 end
