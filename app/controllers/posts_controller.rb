@@ -1,28 +1,19 @@
-class PostsController < ApplicationController
+require './lib/posts_helper'
 
+class PostsController < ApplicationController
+  include PostsHelper
   def new
     @post = Post.new
   end
 
   def create
     @post = Post.create(post_params)
-    # like = Like.create({liked: 1, post_id: @post.id, user_id: current_user.id})
-    # p like.save
-    # p Like.all
     redirect_to posts_url
   end
 
   def index
     @posts = Post.all
-    @likes = Like.all
-    @likes_posts = {}
-    @posts.each do |post|
-      like_counter = 0
-      @likes.where(post_id: post.id).each do |like|
-        like_counter += 1
-      end
-      @likes_posts[post.id] = like_counter
-    end
+    @likes_posts = likes_all_posts
   end
 
   def edit
@@ -59,7 +50,6 @@ class PostsController < ApplicationController
 
   def authored_by_user?(params_id)
     @post = Post.find_by(id: params_id)
-    p @post
     current_user.id == @post.user_id ? true : false
   end
 
