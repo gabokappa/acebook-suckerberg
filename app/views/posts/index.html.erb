@@ -33,6 +33,9 @@ Comments:
         <%= link_to edit_comment_path(comment.id) do %>
           Edit comment
           <% end %>&emsp;
+        <%= link_to destroy_comment_path(id: comment.id) do %>
+          Delete comment
+          <% end %>&emsp;
       </li>
     <% end %>
     </ul>

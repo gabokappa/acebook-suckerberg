@@ -15,6 +15,7 @@ feature "Comment Edit", type: :feature do
     fill_in "Message", with: "This is an edited comment"
     click_button "Submit"
     expect(page).to have_content("This is an edited comment")
+    expect(page).to have_content("Edit successful")
     expect(page).to have_no_content("I am a")
   end
 end

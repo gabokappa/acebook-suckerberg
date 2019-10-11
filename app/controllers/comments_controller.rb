@@ -29,7 +29,22 @@ class CommentsController < ApplicationController
   end
 
   def update
-    authored_by_user?(params[:id]) ? @comment.update(comment_params) : flash[:notice] = 'ERROR: only the author can edit the comment'
+    if authored_by_user?(params[:id])
+      @comment.update(comment_params)
+      flash[:notice] = 'Edit successful'
+    else
+      flash[:notice] = 'ERROR: only the author can edit the comment'
+    end
+    redirect_to posts_url
+  end
+
+  def destroy_comment
+    if authored_by_user?(params[:id])
+      @comment.destroy
+      flash[:notice] = '*** Comment successfully deleted ***'
+      else
+        flash[:notice] = "ERROR: only the author can delete the comment"
+      end
     redirect_to posts_url
   end
 
