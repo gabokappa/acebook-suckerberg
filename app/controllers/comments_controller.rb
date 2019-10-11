@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
   def create
     @post_id = params[:comment][:post_test]
     @comment = Comment.create(comment_params)
+    flash[:notice] = "*** Your comment has been posted! ***"
     redirect_to posts_url
   end
 

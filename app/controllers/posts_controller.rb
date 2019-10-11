@@ -50,7 +50,6 @@ class PostsController < ApplicationController
 
   def authored_by_user?(params_id)
     @post = Post.find_by(id: params_id)
-    p @post
     current_user.id == @post.user_id ? true : false
   end
 
