@@ -21,7 +21,7 @@
     <% end %>&emsp;
 
     <%= link_to likeposts_path(post_id: post.id) do %>
-      Like
+      <%= Emoji.find_by_alias("+1").raw %>
     <% end %>
   <br><br>
 Comments:
@@ -29,6 +29,8 @@ Comments:
   <ul>
   <% @comments.each do |comment| %>
 
+    <%= @likes_posts[post.id] %>
+    
       <li><%=comment.message %> </li>
     <% end %>
     </ul>

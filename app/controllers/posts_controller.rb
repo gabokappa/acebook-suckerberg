@@ -1,19 +1,19 @@
-class PostsController < ApplicationController
+require './lib/posts_helper'
 
+class PostsController < ApplicationController
+  include PostsHelper
   def new
     @post = Post.new
   end
 
   def create
     @post = Post.create(post_params)
-    # like = Like.create({liked: 1, post_id: @post.id, user_id: current_user.id})
-    # p like.save
-    # p Like.all
     redirect_to posts_url
   end
 
   def index
     @posts = Post.all
+    @likes_posts = likes_all_posts
   end
 
   def edit
