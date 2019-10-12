@@ -11,5 +11,6 @@ feature "User can delete post ", type: :feature do
     click_link "Delete"
     expect(page).to have_no_content('Hello, friends!')
     expect(page).to have_no_content('ERROR')
+    expect(page).to have_content('*** Post successfully deleted ***')
   end
 end

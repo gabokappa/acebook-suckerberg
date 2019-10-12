@@ -35,7 +35,12 @@ class PostsController < ApplicationController
   end
 
   def destroy_post
-    authored_by_user?(params[:id]) ? @post.destroy : flash_the_notice = flash[:notice] = "ERROR: only the author can delete this post"
+    if authored_by_user?(params[:id])
+      @post.destroy
+      flash[:notice] = '*** Post successfully deleted ***'
+    else
+      flash[:notice] = "ERROR: only the author can delete this post"
+    end
     redirect_to posts_url
   end
 
