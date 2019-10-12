@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(version: 20191010110513) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "comments", "posts"
-  add_foreign_key "comments", "users"
-  add_foreign_key "likes", "comments"
-  add_foreign_key "likes", "posts"
-  add_foreign_key "likes", "users"
-  add_foreign_key "posts", "users"
+  add_foreign_key "comments", "posts", on_delete: :cascade
+  add_foreign_key "comments", "users", on_delete: :cascade
+  add_foreign_key "likes", "comments", on_delete: :cascade
+  add_foreign_key "likes", "posts", on_delete: :cascade
+  add_foreign_key "likes", "users", on_delete: :cascade
+  add_foreign_key "posts", "users", on_delete: :cascade
 end
