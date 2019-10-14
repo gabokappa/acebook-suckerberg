@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # root to: "home#index"
   #index"
   authenticated :user do
-    root 'home#index', as: 'authenticated_root'
+    root 'walls#index', as: 'authenticated_root'
   end
   devise_scope :user do
     root 'devise/sessions#new'
@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
   get 'likeposts', to: 'likes#create_no_form_posts', as: :likeposts
   get 'likecomments', to: 'likes#create_no_form_comments', as: :likecomments
+
+  get 'indexwall', to: 'walls#index', as: :indexwall
+
     
   resources :posts
   resources :comments
