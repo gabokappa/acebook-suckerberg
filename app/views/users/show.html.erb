@@ -3,3 +3,57 @@
   <%= user.email %>
   <%= link_to 'show', user %>
 <% end %>
+
+<p></p>
+<%= link_to new_post_path(id: @user.id) do %>
+  New post
+<% end %>
+
+<% @usersposts.reverse.each do |post| %>
+      <p><%= post.message %>: posted at <%= post.created_at.strftime('%H:%M on %d-%b-%y') %>
+    </p>
+
+    <%= link_to edit_post_path(post.id) do %>
+      Edit
+    <% end %>&emsp;
+
+    <%= link_to destroy_post_path(id: post.id) do %>
+      Delete
+    <% end %>&emsp;
+
+    <%= link_to new_comment_path(post_id: post.id) do %>
+      Comment
+    <% end %>&emsp;
+
+    <%= link_to likeposts_path(post_id: post.id) do %>
+      <%= Emoji.find_by_alias("+1").raw %>
+    <% end %>
+    <%= @likes_posts[post.id] %>
+
+  <br><br>
+Comments:
+<% @comments = Comment.where(post_id: post.id) %>
+  <ul>
+  <% @comments.each do |comment| %>
+      <li><%=comment.message %>
+        <%= link_to edit_comment_path(comment.id) do %>
+          Edit comment
+          <% end %>&emsp;
+        <%= link_to destroy_comment_path(id: comment.id) do %>
+          Delete comment
+          <% end %>&emsp;
+    <%= link_to likecomments_path(comment_id: comment.id) do %>
+      <%= Emoji.find_by_alias("metal").raw %>
+
+    <% end %>
+    <%= @likes_comments[comment.id] %>
+    </li>
+    </ul>
+    <% end %>
+<% end %>
+
+<style>
+p {
+    white-space: pre-line; /* collapse WS, preserve LB */
+  }
+</style>

@@ -3,10 +3,13 @@ require './lib/posts_helper'
 class PostsController < ApplicationController
   include PostsHelper
   def new
+    @user = User.find_by(id: params[:id])
+    p @user
     @post = Post.new
   end
 
   def create
+    @wall_id = params[:post][:wall_id]
     @post = Post.create(post_params)
     redirect_to posts_url
   end
@@ -51,7 +54,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:message).merge(user_id: current_user.id)
+    params.require(:post).permit(:message).merge(user_id: current_user.id, wall_id: @wall_id)
   end
 
   def authored_by_user?(params_id)
