@@ -4,7 +4,9 @@ class PostsController < ApplicationController
   include PostsHelper
   def new
     @user = User.find_by(id: params[:id])
-    p @user
+    if @user == nil
+      @user = current_user
+    end 
     @post = Post.new
   end
 
