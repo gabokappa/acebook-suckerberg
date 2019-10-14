@@ -1,0 +1,14 @@
+<h1>Editing Album</h1>
+
+<%# <%= render 'form', album: @album %> %>
+
+<%= form_for @album do |f| %>
+<div class="field">
+   <%= f.label :pic %><br/>
+ <%= f.file_field :pic %>
+</div>
+<%= f.submit "Submit" %>
+<% end %>
+
+<%= link_to 'Show', @album %> |
+<%= link_to 'Back', albums_path %>

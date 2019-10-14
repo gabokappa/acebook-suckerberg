@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :album do
+    name { "MyText" }
+  end
+
 
   factory :like do
     liked { 1 }
