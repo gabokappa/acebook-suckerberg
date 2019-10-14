@@ -42,11 +42,11 @@ class PostsController < ApplicationController
   end
 
   def destroy_post
-    if authored_by_user?(params[:id])
+    if authored_by_user?(params[:id]) || wall_owner?(params[:id])
       @post.destroy
       flash[:notice] = '*** Post successfully deleted ***'
     else
-      flash[:notice] = "ERROR: only the author can delete this post"
+      flash[:notice] = 'ERROR: only the author can delete this post'
     end
     redirect_to posts_url
   end
@@ -67,7 +67,12 @@ class PostsController < ApplicationController
 
   def authored_by_user?(params_id)
     @post = Post.find_by(id: params_id)
-    current_user.id == @post.user_id ? true : false
+    current_user.id == @post.user_id
+  end
+
+  def wall_owner?(params_id)
+    @post = Post.find_by(id: params_id)
+    current_user.id == @post.wall_id
   end
 
 end
