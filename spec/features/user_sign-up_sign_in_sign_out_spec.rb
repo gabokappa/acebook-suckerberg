@@ -9,7 +9,6 @@ feature 'Authentication' do
     fill_in 'user_password', with: '123456'
     fill_in 'user_password_confirmation', with: '123456'
     click_button 'Sign up'
-    save_and_open_page
     expect(page).to have_current_path('/posts')
   end
   scenario 'User need to provide valid email' do
