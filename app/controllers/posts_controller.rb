@@ -2,6 +2,7 @@ require './lib/posts_helper'
 
 class PostsController < ApplicationController
   include PostsHelper
+
   def new
     @user = User.find_by(id: params[:id])
     if @user == nil
@@ -35,7 +36,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    authored_by_user?(params[:id]) ? @post.update(post_params) : flash[:notice] = "ERROR: only the author can edit the post"
+    p params
+    authored_by_user?(params[:id]) ? @post.update(edit_params) : flash[:notice] = "ERROR: only the author can edit the post"
     redirect_to posts_url
   end
 
@@ -57,6 +59,10 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:message).merge(user_id: current_user.id, wall_id: @wall_id)
+  end
+
+  def edit_params
+    params.require(:post).permit(:message)
   end
 
   def authored_by_user?(params_id)
