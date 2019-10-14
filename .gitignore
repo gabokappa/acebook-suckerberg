@@ -20,6 +20,10 @@ Gemfile.lock
 !/log/.keep
 !/tmp/.keep
 
+# ignores local storage
+/storage/*
+/storage
+
 /node_modules
 /yarn-error.log
 
