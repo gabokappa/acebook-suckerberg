@@ -53,7 +53,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   # devise set-up
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  # set storage to local
+  # set storage to ko
   config.active_storage.service = :local
 
 end
