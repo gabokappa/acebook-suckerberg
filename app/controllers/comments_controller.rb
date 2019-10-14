@@ -43,8 +43,8 @@ class CommentsController < ApplicationController
       @comment.destroy
       flash[:notice] = '*** Comment successfully deleted ***'
       else
-        flash[:notice] = "ERROR: only the author can delete the comment"
-      end
+        flash[:notice] = 'ERROR: only the author can delete the comment'
+    end
     redirect_to posts_url
   end
 
