@@ -11,9 +11,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    if params[:id] == nil
+      @user = current_user
+    else     
+      @user = User.find(params[:id])
+    end 
     @usersposts = Post.where(wall_id: @user.id)
-    p @usersposts
     @likes_posts = likes_all_posts
     @likes_comments = likes_all_comments
   end
