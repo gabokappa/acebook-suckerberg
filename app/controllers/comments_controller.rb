@@ -66,7 +66,7 @@ class CommentsController < ApplicationController
   def find_post_wall(post_id)
     @current_post = Post.find_by(id: post_id)
     @current_post.wall_id
-  end 
+  end
 
 
 end
