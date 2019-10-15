@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   def create
     @wall_id = params[:post][:wall_id]
     @post = Post.create(post_params)
-    redirect_to posts_url
+    redirect_to user_wall_path(@wall_id)
   end
 
   def index
@@ -27,17 +27,17 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if current_user.id != @post.user_id
       flash[:notice] = 'ERROR: only the author can edit the post'
-      redirect_to posts_url
+      redirect_to user_wall_path(@post.wall_id)
     end
     if too_much_time_elapsed
       flash[:notice] = 'ERROR: You were too late! Update faster (10 mins limit)!'
-      redirect_to posts_url
+      redirect_to user_wall_path(@post.wall_id)
     end
   end
 
   def update
     authored_by_user?(params[:id]) ? @post.update(edit_params) : flash[:notice] = "ERROR: only the author can edit the post"
-    redirect_to posts_url
+    redirect_to user_wall_path(@post.wall_id)
   end
 
   def destroy_post
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
     else
       flash[:notice] = 'ERROR: only the author can delete this post'
     end
-    redirect_to posts_url
+    redirect_to user_wall_path(@post.wall_id)
   end
 
   private

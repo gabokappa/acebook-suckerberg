@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'indexwall', to: 'walls#index', as: :indexwall
   get 'userswall', to: 'users#show', as: :userswall
   match 'users/:id', to: 'users#show', via: 'get'
+  get 'users/:id', to: 'users#show', as: :user_wall
 
     
   resources :posts
