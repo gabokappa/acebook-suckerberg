@@ -24,7 +24,7 @@ class AlbumsController < ApplicationController
   # POST /albums
   # POST /albums.json
   def create
-    @album = Album.new(album_params.merge(user_id: current_user.id).permit(:pic))
+    @album = Album.new(params.require(:album).permit(:name, :pic).merge(user_id: current_user.id))
 
     respond_to do |format|
       if @album.save
@@ -41,7 +41,9 @@ class AlbumsController < ApplicationController
   # PATCH/PUT /albums/1.json
   def update
     respond_to do |format|
-      if @album.update(album_params.permit(:album['pic']))
+      # if @album.update(params.require(:album).permit(:name, :pic).merge(user_id: current_user.id))
+        if @album.update(params.require(:album).permit(:name, :content, pics:[]).merge(user_id: current_user.id))
+
         format.html { redirect_to @album, notice: 'Album was successfully updated.' }
         p params[:album['pic']]
         @album.pics.attach(params[:pic])
