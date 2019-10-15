@@ -1,0 +1,22 @@
+<h1>Editing Album</h1>
+
+<%= form_for @album do |f| %>
+<div class="field">
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br/>
+  <br/>
+  <br/>
+  Add pictures to album <br>
+  <%= f.file_field :pics, multiple: true %>
+</div>
+<%= f.submit "Submit" %>
+<% end %>
+
+<% @album.pics.all.each do |pic| %>
+<%= image_tag(pic, :size => '80x80') %>
+<% end %>
+
+
+<%= link_to 'Show', @album %> |
+<%= link_to 'Back', albums_path %>
