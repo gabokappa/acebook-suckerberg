@@ -36,15 +36,13 @@ class PostsController < ApplicationController
   end
 
   def update
-    p params
     authored_by_user?(params[:id]) ? @post.update(edit_params) : flash[:notice] = "ERROR: only the author can edit the post"
     redirect_to posts_url
   end
 
   def destroy_post
     if authored_by_user?(params[:id]) || wall_owner?(params[:id])
-      @post.destroy
-      flash[:notice] = '*** Post successfully deleted ***'
+      @post.destroy; flash[:notice] = '*** Post successfully deleted ***'
     else
       flash[:notice] = 'ERROR: only the author can delete this post'
     end

@@ -12,8 +12,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    p @user
-    @usersposts = Post.where(user_id: current_user.id)
+    @usersposts = Post.where(wall_id: @user.id)
+    p @usersposts
     @likes_posts = likes_all_posts
     @likes_comments = likes_all_comments
   end
