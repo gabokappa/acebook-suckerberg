@@ -75,6 +75,12 @@ class AlbumsController < ApplicationController
     end
   end
 
+  def destroy_pic
+    @album = Album.find(params[:album_id])
+    @album.pics.find(params[:pic_id]).destroy
+    redirect_to "/albums/#{params[:album_id]}"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_album
@@ -85,4 +91,6 @@ class AlbumsController < ApplicationController
     def album_params
       params.require(:album).permit(:name)
     end
+
+
 end

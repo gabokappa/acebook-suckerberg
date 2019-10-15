@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   get 'likeposts', to: 'likes#create_no_form_posts', as: :likeposts
   get 'likecomments', to: 'likes#create_no_form_comments', as: :likecomments
-    
+
+  get 'destroy_pic', to: 'albums#destroy_pic', as: :destroy_pic
+
   resources :posts
   resources :comments
   resources :likes
