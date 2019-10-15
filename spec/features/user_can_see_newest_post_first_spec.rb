@@ -5,7 +5,7 @@ feature "Timeline order", type: :feature do
   scenario "shows newest post first" do
     user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
-    visit "/posts"
+    visit "/userswall"
     click_link "New post"
     fill_in "Message", with: "Hello, world!"
     click_button "Submit"
@@ -14,6 +14,6 @@ feature "Timeline order", type: :feature do
     fill_in "Message", with: "Newest message"
     click_button "Submit"
 
-    expect(page.find('p:nth-child(7)')).to have_content "Newest message"
+    expect(page.find('p:nth-child(10)')).to have_content "Newest message"
   end
 end

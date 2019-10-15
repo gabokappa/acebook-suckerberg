@@ -39,7 +39,11 @@ end
 
   def find_post_wall(post_id)
     @current_post = Post.find_by(id: post_id)
-    @current_post.wall_id
+    if @current_post == nil
+      return current_user.id
+    else
+      @current_post.wall_id
+    end
   end
 
   def find_comment_wall(comment_id)

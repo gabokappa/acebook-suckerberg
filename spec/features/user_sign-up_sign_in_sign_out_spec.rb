@@ -9,7 +9,7 @@ feature 'Authentication' do
     fill_in 'user_password', with: '123456'
     fill_in 'user_password_confirmation', with: '123456'
     click_button 'Sign up'
-    expect(page).to have_current_path('/posts')
+    expect(page).to have_current_path('/userswall')
   end
   scenario 'User need to provide valid email' do
     visit '/posts'
