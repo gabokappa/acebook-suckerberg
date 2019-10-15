@@ -1,5 +1,14 @@
 <h1>Editing Album</h1>
 
+<% @album.pics.all.each do |pic| %>
+<%= image_tag(pic, :size => '80x80') %>
+<%= link_to destroy_pic_path(pic_id: pic.id, album_id: @album.id) do %>
+    Delete
+  <% end %>&emsp;
+<% end %>&emsp;
+<br>
+<br>
+
 <%= form_for @album do |f| %>
 <div class="field">
   <%= f.label :name %>
@@ -11,11 +20,11 @@
   <%= f.file_field :pics, multiple: true %>
 </div>
 <%= f.submit "Submit" %>
-<% end %>
 
-<% @album.pics.all.each do |pic| %>
-<%= image_tag(pic, :size => '80x80') %>
 <% end %>
+<br>
+
+
 
 
 <%= link_to 'Show', @album %> |
