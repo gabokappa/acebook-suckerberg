@@ -4,10 +4,12 @@ RSpec.describe "albums/index", type: :view do
   before(:each) do
     assign(:albums, [
       Album.create!(
-        :name => "MyText"
+        :name => "MyText",
+        :user => FactoryBot.create(:user)
       ),
       Album.create!(
-        :name => "MyText"
+        :name => "MyText",
+        :user => FactoryBot.create(:user)
       )
     ])
   end

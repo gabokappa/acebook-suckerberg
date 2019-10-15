@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :album do
     name { "MyText" }
+    user_id {FactoryBot.create(:user).id}
   end
 
 

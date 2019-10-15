@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "albums/show", type: :view do
   before(:each) do
     @album = assign(:album, Album.create!(
-      :name => "MyText"
+      :name => "MyText",
+      :user => FactoryBot.create(:user)
     ))
   end
 
