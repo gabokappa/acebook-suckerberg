@@ -40,19 +40,29 @@ class AlbumsController < ApplicationController
   # PATCH/PUT /albums/1
   # PATCH/PUT /albums/1.json
   def update
-    respond_to do |format|
-      # if @album.update(params.require(:album).permit(:name, :pic).merge(user_id: current_user.id))
-        if @album.update(params.require(:album).permit(:name, :content, pics:[]).merge(user_id: current_user.id))
+    @album.update(params.require(:album).permit(:name, :content, pics:[]).merge(user_id: current_user.id))
+    # @album.pics.attach(params[:album][:pics])
+    p 'test'
+    p @album.pics.all
+    p 'test2'
+# brew install imagemagick
+# sudo apt-get install libmagickwand-dev
 
-        format.html { redirect_to @album, notice: 'Album was successfully updated.' }
-        p params[:album['pic']]
-        @album.pics.attach(params[:pic])
-        format.json { render :show, status: :ok, location: @album }
-      else
-        format.html { render :edit }
-        format.json { render json: @album.errors, status: :unprocessable_entity }
-      end
-    end
+
+
+    # respond_to do |format|
+    #   # if @album.update(params.require(:album).permit(:name, :pic).merge(user_id: current_user.id))
+    #     if @album.update(params.require(:album).permit(:name, :content, pics:[]).merge(user_id: current_user.id))
+    #
+    #     format.html { redirect_to @album, notice: 'Album was successfully updated.' }
+    #     p params[:pic]
+    #     @album.pics.attach(params[:pics])
+    #     format.json { render :show, status: :ok, location: @album }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @album.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /albums/1
