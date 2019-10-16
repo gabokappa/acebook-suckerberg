@@ -13,6 +13,7 @@ gem 'devise'
 gem 'gemoji'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2'
+gem 'redis', '~> 3.2'
 # image analysis
 gem 'mini_magick'
 gem 'image_magick'

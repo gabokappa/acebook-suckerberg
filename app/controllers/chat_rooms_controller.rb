@@ -11,6 +11,7 @@ class ChatRoomsController < ApplicationController
   # GET /chat_rooms/1.json
   def show
     @chat_room = ChatRoom.includes(:messages).find_by(id: params[:id])
+    @message = Message.new
   end
 
   # GET /chat_rooms/new

@@ -22,9 +22,11 @@ Rails.application.routes.draw do
   match 'users/:id', to: 'users#show', via: 'get'
   get 'users/:id', to: 'users#show', as: :user_wall
 
-    
   resources :posts
   resources :comments
   resources :likes
   resources :users
+  resources :chat_rooms, only: [:new, :create, :show, :index]
+  root 'chat_rooms#index'
+  mount ActionCable.server => '/cable'
 end
