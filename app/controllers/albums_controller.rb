@@ -66,11 +66,18 @@ class AlbumsController < ApplicationController
   # DELETE /albums/1
   # DELETE /albums/1.json
   def destroy
-    @album.destroy
-    respond_to do |format|
-      format.html { redirect_to '/', notice: 'Album was successfully destroyed.' }
-      format.json { head :no_content }
+    p (params[:id])
+    if album_authored_by_user?(params[:id])
+      @album.destroy
+      respond_to do |format|
+        format.html { redirect_to '/', notice: 'Album was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      flash[:notice] = 'ERROR: only the owner of the album can delete the Album'
+      redirect_to '/'
     end
+
   end
 
   def destroy_pic
