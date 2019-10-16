@@ -22,4 +22,8 @@
     <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
+  <%= render "layouts/header" %>
+<%= render "layouts/sidenav" %>
+<%= yield %>
+<%= render "layouts/footer" %>
 </html>

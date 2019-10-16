@@ -7,10 +7,12 @@ end
 
 # gem used for styling
 gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'coffee-rails'
 # gem to run user auth and sign-up
 gem 'devise'
 # Emoticon library
 gem 'gemoji'
+gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2'
 gem 'redis', '~> 3.2'
@@ -30,6 +32,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'warden'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+gem 'turbolinks', '>= 5.0.0.beta2'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

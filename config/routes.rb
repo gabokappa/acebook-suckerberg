@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :likes
   resources :users
-  resources :chat_rooms, only: [:new, :create, :show, :index]
+  resources :chat_rooms, only: [:new, :create, :show, :index, :update]
   root 'chat_rooms#index'
   mount ActionCable.server => '/cable'
 end
