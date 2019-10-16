@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_104356) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "albums", "users", on_delete: :cascade
-  add_foreign_key "chat_rooms", "users", on_delete: :cascade
+  add_foreign_key "chat_rooms", "users"
   add_foreign_key "comments", "posts", on_delete: :cascade
   add_foreign_key "comments", "users", on_delete: :cascade
   add_foreign_key "likes", "comments", on_delete: :cascade
