@@ -5,14 +5,11 @@
   <%= @album.name %>
 </p>
 
-<%= form_for @album do |f| %>
-<div class="field">
-   <%= f.label :pic %><br/>
- <%= f.file_field :pic %>
-</div>
-<%= f.submit "Submit" %>
+<% @album.pics.all.each do |pic| %>
+<%= image_tag(pic, :size => '80x80') %>
 <% end %>
+<br>
+<br>
 
-
-<%= link_to 'Edit', edit_album_path(@album) %> |
+<%= link_to 'Edit', edit_album_path(@album) %>&emsp; |
 <%= link_to 'Back', albums_path %>

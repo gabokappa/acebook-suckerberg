@@ -75,6 +75,21 @@ class AlbumsController < ApplicationController
     end
   end
 
+  def destroy_pic
+    if album_authored_by_user?(params[:album_id])
+    @album = Album.find(params[:album_id])
+    @album.pics.find(params[:pic_id]).destroy
+  else
+    flash[:notice] = 'ERROR: only the owner of the albume can delete the Picture'
+  end
+  redirect_to "/albums/#{params[:album_id]}"
+end
+
+  def album_authored_by_user?(params_id)
+    @album = Album.find_by(id: params_id)
+    current_user.id == @album.user_id ? true : false
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_album
@@ -85,4 +100,6 @@ class AlbumsController < ApplicationController
     def album_params
       params.require(:album).permit(:name)
     end
+
+
 end
