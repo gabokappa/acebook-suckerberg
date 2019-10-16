@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   resources :albums
   devise_for :user, controllers: { sessions: 'users/sessions' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # root to: "home#index"
-  #index"
+  # index"
   authenticated :user do
     root 'users#show', as: 'authenticated_root'
   end

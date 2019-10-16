@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddConfirmableToDevise < ActiveRecord::Migration[5.1]
   def up
     add_column :users, :confirmation_token, :string
@@ -17,12 +19,8 @@ class AddConfirmableToDevise < ActiveRecord::Migration[5.1]
     # remove_columns :users, :unconfirmed_email # Only if using reconfirmable
   end
 
-
   def change
-    change_table(:users) do |t|
-      t.confirmable
-    end
-    add_index  :users, :confirmation_token, :unique => true
+    change_table(:users, &:confirmable)
+    add_index :users, :confirmation_token, unique: true
   end
-
 end
