@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   match 'users/:id', to: 'users#show', via: 'get'
   get 'users/:id', to: 'users#show', as: :user_wall
 
+  get 'destroy_album', to: 'albums#destroy', as: :destroy_album
+
   resources :posts
   resources :comments
   resources :likes

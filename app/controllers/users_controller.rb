@@ -13,12 +13,13 @@ class UsersController < ApplicationController
   def show
     if params[:id] == nil
       @user = current_user
-    else     
+    else
       @user = User.find(params[:id])
-    end 
+    end
     @usersposts = Post.where(wall_id: @user.id)
     @likes_posts = likes_all_posts
     @likes_comments = likes_all_comments
+    @albums = Album.all.where(user_id: @user.id)
   end
 
 end

@@ -1,11 +1,29 @@
-<h2>Welcome to <%=@user.email %>'s wall</h2>
 <% @users = User.all %>
 <% @users.each do |user| %>
   <%= user.email %>
   <%= link_to 'show', user %>
 <% end %>
 
+<h2>Welcome to <%=@user.email %>'s wall</h2>
+
+<% @albums.each do |album| %>
+  <%= album.name %>
+  <%= link_to 'Show album', album %>
+  <%= link_to edit_album_path(album.id) do %>
+    Edit
+  <% end %>&emsp;
+
+  <%= link_to destroy_album_path(id: album.id) do %>
+    Delete
+  <% end %>&emsp;
+  <br>
+<% end %>
+
 <p></p>
+<%= link_to 'New Album', new_album_path %>
+<br>
+<br>
+
 <%= link_to new_post_path(id: @user.id) do %>
   New post
 <% end %>

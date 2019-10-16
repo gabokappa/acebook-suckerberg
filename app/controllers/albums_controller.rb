@@ -42,9 +42,6 @@ class AlbumsController < ApplicationController
   def update
     @album.update(params.require(:album).permit(:name, :content, pics:[]).merge(user_id: current_user.id))
     # @album.pics.attach(params[:album][:pics])
-    p 'test'
-    p @album.pics.all
-    p 'test2'
 # brew install imagemagick
 # sudo apt-get install libmagickwand-dev
 
@@ -82,7 +79,8 @@ class AlbumsController < ApplicationController
   else
     flash[:notice] = 'ERROR: only the owner of the albume can delete the Picture'
   end
-  redirect_to "/albums/#{params[:album_id]}"
+  redirect_to '/'
+  # redirect_to "/albums/#{params[:album_id]}"
 end
 
   def album_authored_by_user?(params_id)
