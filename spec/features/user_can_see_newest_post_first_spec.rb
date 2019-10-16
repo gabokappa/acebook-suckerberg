@@ -14,6 +14,6 @@ feature "Timeline order", type: :feature do
     fill_in "Message", with: "Newest message"
     click_button "Submit"
 
-    expect(page.find('p:nth-child(13)')).to have_content "Newest message"
+    expect(page.find('p:nth-child(15)')).to have_content "Newest message"
   end
 end
