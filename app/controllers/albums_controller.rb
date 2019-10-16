@@ -19,6 +19,10 @@ class AlbumsController < ApplicationController
 
   # GET /albums/1/edit
   def edit
+    if !album_authored_by_user?(@album.id)
+      flash[:notice] = 'ERROR: only the owner of the album can edit the Album'
+      redirect_to '/'
+    end
   end
 
   # POST /albums
@@ -28,7 +32,7 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.save
-        format.html { redirect_to @album, notice: 'Album was successfully created.' }
+        format.html { redirect_to '/', notice: 'Album was successfully created.' }
         format.json { render :show, status: :created, location: @album }
       else
         format.html { render :new }
@@ -40,15 +44,15 @@ class AlbumsController < ApplicationController
   # PATCH/PUT /albums/1
   # PATCH/PUT /albums/1.json
   def update
-    @album.update(params.require(:album).permit(:name, :content, pics:[]).merge(user_id: current_user.id))
+    if album_authored_by_user?(@album.id)
+      @album.update(params.require(:album).permit(:name, :content, pics:[]).merge(user_id: current_user.id))
+    else
+      flash[:notice] = 'ERROR: only the owner of the album can edit the Album'
+    end
+
     # @album.pics.attach(params[:album][:pics])
-    p 'test'
-    p @album.pics.all
-    p 'test2'
 # brew install imagemagick
 # sudo apt-get install libmagickwand-dev
-
-
 
     # respond_to do |format|
     #   # if @album.update(params.require(:album).permit(:name, :pic).merge(user_id: current_user.id))
@@ -63,16 +67,24 @@ class AlbumsController < ApplicationController
     #     format.json { render json: @album.errors, status: :unprocessable_entity }
     #   end
     # end
+    redirect_to '/'
   end
 
   # DELETE /albums/1
   # DELETE /albums/1.json
   def destroy
-    @album.destroy
-    respond_to do |format|
-      format.html { redirect_to albums_url, notice: 'Album was successfully destroyed.' }
-      format.json { head :no_content }
+    p (params[:id])
+    if album_authored_by_user?(params[:id])
+      @album.destroy
+      respond_to do |format|
+        format.html { redirect_to '/', notice: 'Album was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      flash[:notice] = 'ERROR: only the owner of the album can delete the Album'
+      redirect_to '/'
     end
+
   end
 
   def destroy_pic
@@ -80,9 +92,10 @@ class AlbumsController < ApplicationController
     @album = Album.find(params[:album_id])
     @album.pics.find(params[:pic_id]).destroy
   else
-    flash[:notice] = 'ERROR: only the owner of the albume can delete the Picture'
+    flash[:notice] = 'ERROR: only the owner of the album can delete the Picture'
   end
-  redirect_to "/albums/#{params[:album_id]}"
+  redirect_to '/'
+  # redirect_to "/albums/#{params[:album_id]}"
 end
 
   def album_authored_by_user?(params_id)
