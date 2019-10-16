@@ -4,36 +4,30 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-  GET /resource/sign_up
-  def new
-    super
-    user.confirm
-  end
+  # GET /resource/sign_up
+  # def new
+  #   super
+  # end
 
+  # POST /resource
+  # def create
+  #   super
+  # end
 
-POST /resource
-  def create
-    super do |resource|
-      BackgroundWorker.trigger(resource)
-    user.confirm
-  end
-end
+  # GET /resource/edit
+  # def edit
+  #   super
+  # end
 
+  # PUT /resource
+  # def update
+  #   super
+  # end
 
-  GET /resource/edit
-  def edit
-    super
-  end
-
-  PUT /resource
-  def update
-    super
-  end
-
-  DELETE /resource
-  def destroy
-    super
-  end
+  # DELETE /resource
+  # def destroy
+  #   super
+  # end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -66,3 +60,14 @@ end
   #   super(resource)
   # end
 end
+
+# Some setup you must do manually if you haven't yet:
+
+#   Ensure you have overridden routes for generated controllers in your routes.rb.
+#  For example:
+
+#    Rails.application.routes.draw do
+
+#      devise_for :users, controllers: {
+#        sessions: 'users/sessions'
+#      }

@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :album do
+    name { "MyText" }
+    user_id {FactoryBot.create(:user).id}
+  end
+
 
   factory :like do
     liked { 1 }
@@ -21,5 +26,6 @@ FactoryBot.define do
     sequence(:email) { |n| "test#{n}@example.com" }
     password              {"foobar"}
     confirmed_at          {Time.now}
+    profile_pic           {File.open("#{::Rails.root}/test_pic.jpg")}
   end
 end

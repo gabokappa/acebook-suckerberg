@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'test_database_helper'
+require 'open-uri'
 
 feature 'Authentication' do
   scenario 'User can sign up and sign in' do
@@ -8,6 +9,7 @@ feature 'Authentication' do
     fill_in 'user_email', with: 'test@test.com'
     fill_in 'user_password', with: '123456'
     fill_in 'user_password_confirmation', with: '123456'
+    find('form input[type="file"]').set("#{::Rails.root}/test_pic.jpg")
     click_button 'Sign up'
     expect(page).to have_current_path('/userswall')
   end
