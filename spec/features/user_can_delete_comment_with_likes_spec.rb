@@ -4,7 +4,7 @@ feature "User can delete a comment with a like ", type: :feature do
   scenario "Can delete own comments with a like" do
     user = FactoryBot.create(:user)
     login_as(user, :scope => :user)
-    visit "/posts"
+    visit '/posts'
     click_link "New post"
     fill_in "Message", with: "Hello, friends!"
     click_button "Submit"
