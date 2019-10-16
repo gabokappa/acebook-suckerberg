@@ -17,12 +17,13 @@ Rails.application.routes.draw do
   get 'likeposts', to: 'likes#create_no_form_posts', as: :likeposts
   get 'likecomments', to: 'likes#create_no_form_comments', as: :likecomments
 
+  get 'destroy_pic', to: 'albums#destroy_pic', as: :destroy_pic
+
   get 'indexwall', to: 'walls#index', as: :indexwall
   get 'userswall', to: 'users#show', as: :userswall
   match 'users/:id', to: 'users#show', via: 'get'
   get 'users/:id', to: 'users#show', as: :user_wall
 
-    
   resources :posts
   resources :comments
   resources :likes
