@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     @post_id = params[:comment][:post_test]
     @comment = Comment.create(comment_params)
     flash[:notice] = "*** Your comment has been posted! ***"
-    redirect_to posts_url
+    redirect_to user_wall_path(find_post_wall(@post_id))
   end
 
   def index
@@ -20,11 +20,11 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     if current_user.id != @comment.user_id
       flash[:notice] = 'ERROR: only the author can edit the comment'
-      redirect_to posts_url
+      redirect_to user_wall_path(find_post_wall(@comment.post_id)) and return
     end
     if too_much_time_elapsed
       flash[:notice] = 'ERROR: You were too late! Update faster (10 mins limit)!'
-      redirect_to posts_url
+      redirect_to user_wall_path(find_post_wall(@comment.post_id))
     end
   end
 
@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
     else
       flash[:notice] = 'ERROR: only the author can edit the comment'
     end
-    redirect_to posts_url
+    redirect_to user_wall_path(find_post_wall(@post_id))
   end
 
   def destroy_comment
@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
       else
         flash[:notice] = 'ERROR: only the author can delete the comment'
     end
-    redirect_to posts_url
+    redirect_to user_wall_path(find_post_wall(@post_id))
   end
 
   def comment_params
@@ -62,5 +62,11 @@ class CommentsController < ApplicationController
   def too_much_time_elapsed
     Time.now - @comment.created_at > 600
   end
+
+  def find_post_wall(post_id)
+    @current_post = Post.find_by(id: post_id)
+    @current_post.wall_id
+  end
+
 
 end

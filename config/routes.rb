@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # root to: "home#index"
   #index"
   authenticated :user do
-    root 'home#index', as: 'authenticated_root'
+    root 'users#show', as: 'authenticated_root'
   end
   devise_scope :user do
     root 'devise/sessions#new'
@@ -19,7 +19,13 @@ Rails.application.routes.draw do
 
   get 'destroy_pic', to: 'albums#destroy_pic', as: :destroy_pic
 
+  get 'indexwall', to: 'walls#index', as: :indexwall
+  get 'userswall', to: 'users#show', as: :userswall
+  match 'users/:id', to: 'users#show', via: 'get'
+  get 'users/:id', to: 'users#show', as: :user_wall
+
   resources :posts
   resources :comments
   resources :likes
+  resources :users
 end

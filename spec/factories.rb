@@ -18,6 +18,8 @@ FactoryBot.define do
   factory :post do
     message { "MyString" }
     user_id {FactoryBot.create(:user).id}
+    wall_id { 1 }
+    id {1}
   end
 
   factory :user do
