@@ -41,7 +41,7 @@ feature "Album", type: :feature do
       find('form input[type="file"]').set("#{::Rails.root}/test_pic.jpg")
       click_button "Submit"
       visit "/albums"
-      click_link "Show"
+      click_link "Edit"
       expect(page).to have_xpath("//img[contains(@src,'test_pic.jpg')]")
       click_link("Delete", :match => :first)
       expect(page).not_to have_xpath("//img[contains(@src,'test_pic.jpg')]")
