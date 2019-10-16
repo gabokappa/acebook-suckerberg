@@ -61,7 +61,7 @@ feature "Album", type: :feature do
       user4 = FactoryBot.create(:user)
       login_as(user4, :scope => :user)
       visit "/albums"
-      click_link "Show"
+      click_link "Edit"
       expect(page).to have_xpath("//img[contains(@src,'test_pic.jpg')]")
       click_link("Delete", :match => :first)
       expect(page).to have_xpath("//img[contains(@src,'test_pic.jpg')]")
