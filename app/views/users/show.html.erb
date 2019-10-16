@@ -5,7 +5,8 @@
 <% end %>
 
 <h2>Welcome to <%=@user.email %>'s wall</h2>
-
+<%= image_tag(@user.profile_pic, :size => '80x80') %>
+<br>
 <% @albums.each do |album| %>
   <%= album.name %>
   <%= link_to 'Show album', album %>
