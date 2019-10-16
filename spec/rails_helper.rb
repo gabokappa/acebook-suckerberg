@@ -1,11 +1,15 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 SimpleCov.start
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+if Rails.env.production?
+  abort('The Rails environment is running in production mode!')
+end
 require 'spec_helper'
 require 'rspec/rails'
 require "#{::Rails.root}/spec/support/controller_macros.rb"
@@ -13,7 +17,7 @@ require "#{::Rails.root}/spec/support/controller_macros.rb"
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
-  config.extend ControllerMacros, :type => :controller
+  config.extend ControllerMacros, type: :controller
   config.include Warden::Test::Helpers
 end
 
