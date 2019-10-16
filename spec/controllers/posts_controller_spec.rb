@@ -12,12 +12,12 @@ describe PostsController, type: :controller do
   describe "POST /" do
     login_user
     it "responds with 200" do
-      post :create, params: { post: { message: "Hello, world!" } }
-      expect(response).to redirect_to(posts_url)
+      post :create, params: { post: { message: "Hello, world!", wall_id: 1 } }
+      expect(response).to redirect_to('/users/1')
     end
 
     it "creates a post" do
-      post :create, params: { post: { message: "Hello, world!" } }
+      post :create, params: { post: { message: "Hello, world!", wall_id: 1 } }
       expect(Post.find_by(message: "Hello, world!")).to be
     end
   end
