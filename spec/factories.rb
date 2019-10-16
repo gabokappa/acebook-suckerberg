@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :message do
+    body { "MyText" }
+    user { nil }
+    chat_room { nil }
+  end
+
   factory :chat_room do
     title { "MyString" }
     user { nil }

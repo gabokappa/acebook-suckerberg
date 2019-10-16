@@ -2,24 +2,30 @@
 
 <h1>Chat Rooms</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<p class="lead"><%= link_to 'New chat room', new_chat_room_path, class: 'btn btn-primary' %></p>
 
-  <tbody>
-    <% @chat_rooms.each do |chat_room| %>
-      <tr>
-        <td><%= link_to 'Show', chat_room %></td>
-        <td><%= link_to 'Edit', edit_chat_room_path(chat_room) %></td>
-        <td><%= link_to 'Destroy', chat_room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ul>
+  <%= render @chat_rooms %>
+</ul>
 
-<br>
+<!--<table>-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th colspan="3"></th>-->
+<!--    </tr>-->
+<!--  </thead>-->
 
-<%= link_to 'New Chat Room', new_chat_room_path %>
+<!--  <tbody>-->
+    <%# @chat_rooms.each do |chat_room| %>
+<!--      <tr>-->
+<!--        <td><%#= link_to 'Show', chat_room %></td>-->
+<!--        <td><%#= link_to 'Edit', edit_chat_room_parath(chat_room) %></td>-->
+<!--        <td><%#= link_to 'Destroy', chat_room, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+<!--      </tr>-->
+    <%# end %>
+<!--  </tbody>-->
+<!--</table>-->
+
+<!--<br>-->
+
+<%#= link_to 'New Chat Room', new_chat_room_path %>

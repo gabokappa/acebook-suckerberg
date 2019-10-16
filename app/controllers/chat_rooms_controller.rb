@@ -10,6 +10,7 @@ class ChatRoomsController < ApplicationController
   # GET /chat_rooms/1
   # GET /chat_rooms/1.json
   def show
+    @chat_room = ChatRoom.includes(:messages).find_by(id: params[:id])
   end
 
   # GET /chat_rooms/new
@@ -24,16 +25,14 @@ class ChatRoomsController < ApplicationController
   # POST /chat_rooms
   # POST /chat_rooms.json
   def create
-    @chat_room = ChatRoom.new(chat_room_params)
+    @chat_room = current_user.chat_rooms.build(chat_room_params)
 
-    respond_to do |format|
-      if @chat_room.save
-        format.html { redirect_to @chat_room, notice: 'Chat room was successfully created.' }
-        format.json { render :show, status: :created, location: @chat_room }
-      else
-        format.html { render :new }
-        format.json { render json: @chat_room.errors, status: :unprocessable_entity }
-      end
+    # respond_to do |format|
+    if @chat_room.save
+      flash[:success] = 'Chat room added!'
+      redirect_to chat_rooms_path
+    else
+      render 'new'
     end
   end
 
@@ -62,13 +61,13 @@ class ChatRoomsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_chat_room
-      @chat_room = ChatRoom.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_chat_room
+    @chat_room = ChatRoom.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def chat_room_params
-      params.fetch(:chat_room, {})
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def chat_room_params
+    params.require(:chat_room).permit(:title)
+  end
 end
