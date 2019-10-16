@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :chat_room do
+    title { "MyString" }
+    user { nil }
+  end
+
   factory :album do
     name { "MyText" }
     user_id {FactoryBot.create(:user).id}

@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :likes, dependent: :delete_all
   has_one_attached :profile_pic
   has_many :albums, dependent: :delete_all
+  has_many :chat_rooms, dependent: :destroy
 end

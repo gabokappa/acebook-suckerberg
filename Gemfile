@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# gem used for styling
+gem 'bootstrap', '~> 4.0.0.alpha3'
 # gem to run user auth and sign-up
 gem 'devise'
 # Emoticon library
