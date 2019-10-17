@@ -30,9 +30,12 @@ describe LikesController, type: :controller do
   describe 'POST /' do
     login_user
     it 'creates a like for a post without form' do
+      user = FactoryBot.create(:user)
+      sign_in user
       new_post = FactoryBot.create(:post)
       get :create_no_form_posts, params: { post_id: new_post.id}
       expect(Like.all[0]).to be
+      expect(response).to redirect_to("/users/1")
       DatabaseCleaner.clean
     end
   end
@@ -43,6 +46,7 @@ describe LikesController, type: :controller do
       new_comment = FactoryBot.create(:comment)
       get :create_no_form_comments, params: { comment_id: new_comment.id }
       expect(Like.all[0]).to be
+      expect(response).to redirect_to("/users/1")
       DatabaseCleaner.clean
     end
   end
