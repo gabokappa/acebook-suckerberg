@@ -1,3 +1,6 @@
+<nav class="navbar navbar-default">
+</nav>
+<div class="container">
 <% @users = User.all %>
 <% @users.each do |user| %>
   <%= user.email %>
@@ -77,3 +80,4 @@ p {
     white-space: pre-line; /* collapse WS, preserve LB */
   }
 </style>
+</div>
