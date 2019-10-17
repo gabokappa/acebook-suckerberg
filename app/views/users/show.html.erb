@@ -4,7 +4,7 @@
   <%= link_to 'show', user %>
 <% end %>
 
-<h2>Welcome to <%=@user.email %>'s wall</h2>
+<h2>Welcome to <%= @user.username %>'s (<%=@user.email %>) wall</h2>
 
 <% @albums.each do |album| %>
   <%= album.name %>
