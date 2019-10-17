@@ -1,23 +1,17 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :edit, :update, :destroy]
 
-  # GET /albums
-  # GET /albums.json
   def index
     @albums = Album.all
   end
 
-  # GET /albums/1
-  # GET /albums/1.json
   def show
   end
 
-  # GET /albums/new
   def new
     @album = Album.new
   end
 
-  # GET /albums/1/edit
   def edit
     if !album_authored_by_user?(@album.id)
       flash[:notice] = 'ERROR: only the owner of the album can edit the Album'
@@ -25,8 +19,6 @@ class AlbumsController < ApplicationController
     end
   end
 
-  # POST /albums
-  # POST /albums.json
   def create
     @album = Album.new(params.require(:album).permit(:name, :pic).merge(user_id: current_user.id))
 
@@ -41,39 +33,16 @@ class AlbumsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /albums/1
-  # PATCH/PUT /albums/1.json
   def update
     if album_authored_by_user?(@album.id)
       @album.update(params.require(:album).permit(:name, :content, pics:[]).merge(user_id: current_user.id))
     else
       flash[:notice] = 'ERROR: only the owner of the album can edit the Album'
     end
-
-    # @album.pics.attach(params[:album][:pics])
-# brew install imagemagick
-# sudo apt-get install libmagickwand-dev
-
-    # respond_to do |format|
-    #   # if @album.update(params.require(:album).permit(:name, :pic).merge(user_id: current_user.id))
-    #     if @album.update(params.require(:album).permit(:name, :content, pics:[]).merge(user_id: current_user.id))
-    #
-    #     format.html { redirect_to @album, notice: 'Album was successfully updated.' }
-    #     p params[:pic]
-    #     @album.pics.attach(params[:pics])
-    #     format.json { render :show, status: :ok, location: @album }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @album.errors, status: :unprocessable_entity }
-    #   end
-    # end
     redirect_to '/'
   end
 
-  # DELETE /albums/1
-  # DELETE /albums/1.json
   def destroy
-    p (params[:id])
     if album_authored_by_user?(params[:id])
       @album.destroy
       respond_to do |format|
@@ -84,7 +53,6 @@ class AlbumsController < ApplicationController
       flash[:notice] = 'ERROR: only the owner of the album can delete the Album'
       redirect_to '/'
     end
-
   end
 
   def destroy_pic
@@ -95,7 +63,6 @@ class AlbumsController < ApplicationController
     flash[:notice] = 'ERROR: only the owner of the album can delete the Picture'
   end
   redirect_to '/'
-  # redirect_to "/albums/#{params[:album_id]}"
 end
 
   def album_authored_by_user?(params_id)
@@ -104,15 +71,14 @@ end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_album
       @album = Album.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def album_params
       params.require(:album).permit(:name)
     end
-
-
 end
+
+# brew install imagemagick
+# sudo apt-get install libmagickwand-dev

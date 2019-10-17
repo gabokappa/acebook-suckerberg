@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.feature 'User editing posts ', type: :feature do
+feature 'Posts', type: :feature do
   scenario "User cannot edit another user's post" do
     user = FactoryBot.create(:user)
     login_as(user, scope: :user)

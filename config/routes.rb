@@ -13,13 +13,12 @@ Rails.application.routes.draw do
   devise_scope :user do
     root 'devise/sessions#new'
   end
+
   get 'destroy_post', to: 'posts#destroy_post', as: :destroy_post
   get 'destroy_comment', to: 'comments#destroy_comment', as: :destroy_comment
 
   get 'likeposts', to: 'likes#create_no_form_posts', as: :likeposts
   get 'likecomments', to: 'likes#create_no_form_comments', as: :likecomments
-
-  get 'destroy_pic', to: 'albums#destroy_pic', as: :destroy_pic
 
   get 'indexwall', to: 'walls#index', as: :indexwall
   get 'userswall', to: 'users#show', as: :userswall
@@ -27,6 +26,7 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show', as: :user_wall
 
   get 'destroy_album', to: 'albums#destroy', as: :destroy_album
+  get 'destroy_pic', to: 'albums#destroy_pic', as: :destroy_pic
 
   resources :posts
   resources :comments

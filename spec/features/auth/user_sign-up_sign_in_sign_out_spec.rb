@@ -1,8 +1,6 @@
 require 'rails_helper'
-require 'test_database_helper'
-require 'open-uri'
 
-feature 'Authentication' do
+feature 'User creation and sign-in' do
   scenario 'User can sign up and sign in' do
     visit '/posts'
     click_link('Sign up', :match => :first)
