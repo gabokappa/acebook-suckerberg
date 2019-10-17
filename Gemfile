@@ -5,10 +5,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# bootstrap for styling
+gem 'bootstrap', '~> 4.0.0'
 # gem to run user auth and sign-up
 gem 'devise'
 # Emoticon library
 gem 'gemoji'
+# Need this jquery to run bootstrap
+gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2'
 # image analysis
@@ -31,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
