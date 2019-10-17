@@ -70,7 +70,7 @@ RSpec.describe AlbumsController, type: :controller do
         sign_in user
         album = Album.create! valid_attributes.merge(user_id: user.id)
         get :edit, params: {album: album.to_param, name: 'test_change'}, session: valid_session
-        expect(response).to be_successful
+        expect(album.name).to eq('test_change')
       end
     end
   end
