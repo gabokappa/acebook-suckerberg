@@ -13,6 +13,7 @@ end
 require 'spec_helper'
 require 'rspec/rails'
 require "#{::Rails.root}/spec/support/controller_macros.rb"
+include ActionDispatch::TestProcess
 
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
