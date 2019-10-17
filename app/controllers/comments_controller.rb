@@ -43,16 +43,17 @@ class CommentsController < ApplicationController
     if authored_by_user?(params[:id])
       @comment.destroy
       flash[:notice] = '*** Comment successfully deleted ***'
-      else
-        flash[:notice] = 'ERROR: only the author can delete the comment'
+    else
+      flash[:notice] = 'ERROR: only the author can delete the comment'
     end
     redirect_to user_wall_path(find_post_wall(@post_id))
   end
 
+  private
+
   def comment_params
     params.require(:comment).permit(:message).merge(user_id: current_user.id, post_id: @post_id)
   end
-
 
   def authored_by_user?(params_id)
     @comment = Comment.find_by(id: params_id)
@@ -68,6 +69,4 @@ class CommentsController < ApplicationController
     @current_post = Post.find_by(id: post_id)
     @current_post.wall_id
   end
-
-
 end

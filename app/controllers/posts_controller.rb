@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @user = User.find_by(id: params[:id])
     if @user == nil
       @user = current_user
-    end 
+    end
     @post = Post.new
   end
 
@@ -72,5 +72,4 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params_id)
     current_user.id == @post.wall_id
   end
-
 end

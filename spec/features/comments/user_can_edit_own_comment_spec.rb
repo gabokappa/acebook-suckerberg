@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-feature 'Comment Edit', type: :feature do
-  scenario 'Can edit own comments and view them' do
+feature 'Comments', type: :feature do
+  scenario 'user can edit own comments and view them' do
     user = FactoryBot.create(:user)
     login_as(user, scope: :user)
     visit '/posts'
