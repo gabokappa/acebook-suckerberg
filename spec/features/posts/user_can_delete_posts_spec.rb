@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-feature 'User can delete post ', type: :feature do
-  scenario 'Can delete posts' do
+feature 'Posts', type: :feature do
+  scenario 'user can delete posts' do
     user = FactoryBot.create(:user)
     login_as(user, scope: :user)
     visit '/posts'

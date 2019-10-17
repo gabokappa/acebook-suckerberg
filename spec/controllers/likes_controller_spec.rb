@@ -13,7 +13,6 @@ describe LikesController, type: :controller do
     login_user
     it 'creates a like for a post' do
       new_post = FactoryBot.create(:post)
-      # allow(:create).to receive(:find_post_wall) { 1 }
       post :create, params: { like: { liked: 1, post_id: 1}, wall_id: 1}
       expect(Like.all[0]).to be
       DatabaseCleaner.clean
@@ -47,6 +46,4 @@ describe LikesController, type: :controller do
       DatabaseCleaner.clean
     end
   end
-
-
 end
