@@ -22,4 +22,7 @@ class UsersController < ApplicationController
     @albums = Album.all.where(user_id: @user.id)
   end
 
+  def list 
+  end 
+
 end
