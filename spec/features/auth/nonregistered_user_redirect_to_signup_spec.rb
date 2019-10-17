@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'test_database_helper'
 
 feature 'Authentication - protection' do
   scenario 'unauthed user is always redirected to sign up' do

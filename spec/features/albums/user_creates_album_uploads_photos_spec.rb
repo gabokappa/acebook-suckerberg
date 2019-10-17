@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 require 'rails_helper'
-require 'test_database_helper'
 
 feature 'Album', type: :feature do
   scenario 'Creates new album' do

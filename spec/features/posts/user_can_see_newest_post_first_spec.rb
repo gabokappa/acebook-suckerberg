@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 require 'rails_helper'
-require 'test_database_helper'
 
 feature 'Posts', type: :feature do
   scenario 'shows newest post first' do

@@ -1,6 +1,4 @@
 require 'rails_helper'
-require 'test_database_helper'
-require 'open-uri'
 
 feature 'User creation and sign-in' do
   scenario 'User can sign up and sign in' do
