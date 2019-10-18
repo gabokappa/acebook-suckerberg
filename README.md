@@ -28,16 +28,18 @@ $ rails db:migrate RAILS_ENV=test
 - Devise
 - Bootstrap
 - PostgreSQL
+- ActiveRecord
 
 Testing
- 
+
 - Rubocop
-- travis
-- capybara
-- rubocop
+- Travis
+- Capybara
+- FactoryBot
+- Timecop
+- Simplecov 
 
 ### Features
 
 - team work approach
 - learnings(major ones)
-
