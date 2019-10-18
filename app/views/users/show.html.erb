@@ -22,47 +22,66 @@
 <%= link_to new_post_path(id: @user.id) do %>
   New post
 <% end %>
+<br>
 
 <% @usersposts.reverse.each do |post| %>
-      <p><%= post.message %>: posted at <%= post.created_at.strftime('%H:%M on %d-%b-%y') %>
+  <br>
+  <div class="card mb-3">
+    <div class="card-body">
+      <p class="card-text"><%= post.message %></p>
+    </div>
+  <div class="card-body">
+    <a href="#" class="card-link"><%= link_to edit_post_path(post.id) do %>
+        Edit&emsp;
+      <% end %></a>
+    <a href="#" class="card-link"><%= link_to destroy_post_path(id: post.id) do %>
+        Delete&emsp;
+      <% end %></a>
+    <a href="#" class="card-link"><%= link_to new_comment_path(post_id: post.id) do %>
+        Comment&emsp;
+      <% end %></a>
+    <a href="#" class="card-link"><%= link_to likeposts_path(post_id: post.id) do %>
+        <%= Emoji.find_by_alias("+1").raw %>
+      <% end %>
+      <%= @likes_posts[post.id] %></a>
+  </div>
+  <div class="card-footer text-muted">
+    Posted: <%= post.created_at.strftime('%H:%M on %d-%b-%y') %>
     </p>
+  </div>
+  </div>
 
-    <%= link_to edit_post_path(post.id) do %>
-      Edit
-    <% end %>&emsp;
+<!--  <ul class="list-group list-group-flush">-->
+<!--    <li class="list-group-item">Cras justo odio</li>-->
+<!--    <li class="list-group-item">Dapibus ac facilisis in</li>-->
+<!--    <li class="list-group-item">Vestibulum at eros</li>-->
+<!--  </ul>-->
 
-    <%= link_to destroy_post_path(id: post.id) do %>
-      Delete
-    <% end %>&emsp;
-
-    <%= link_to new_comment_path(post_id: post.id) do %>
-      Comment
-    <% end %>&emsp;
-
-    <%= link_to likeposts_path(post_id: post.id) do %>
-      <%= Emoji.find_by_alias("+1").raw %>
-    <% end %>
-    <%= @likes_posts[post.id] %>
-
-  <br><br>
 Comments:
 <% @comments = Comment.where(post_id: post.id) %>
-  <ul>
+  <ul class="list-group list-group-flush">
   <% @comments.each do |comment| %>
-      <li><%=comment.message %>
-        <%= link_to edit_comment_path(comment.id) do %>
-          Edit comment
-          <% end %>&emsp;
-        <%= link_to destroy_comment_path(id: comment.id) do %>
-          Delete comment
-          <% end %>&emsp;
-    <%= link_to likecomments_path(comment_id: comment.id) do %>
-      <%= Emoji.find_by_alias("metal").raw %>
-
-    <% end %>
-    <%= @likes_comments[comment.id] %>
-    </li>
+      <li class="list-group-item"> <%=comment.message %></li>
+      <div class="card-body">
+        <a href="#" class="card-link"><%= link_to edit_comment_path(comment.id) do %>
+            Edit&emsp;
+          <% end %></a>
+        <a href="#" class="card-link"><%= link_to destroy_comment_path(id: comment.id) do %>
+            Delete&emsp;
+          <% end %></a>
+        <a href="#" class="card-link"><%= link_to likecomments_path(comment_id: comment.id) do %>
+            <%= Emoji.find_by_alias("+1").raw %>
+          <% end %>
+          <%= @likes_comments[comment.id] %></a>
+      </div>
+      <div class="card-footer text-muted">
+        Commented: <%= comment.created_at.strftime('%H:%M on %d-%b-%y') %>
+        </p>
+      </div>
+      </div>
     </ul>
+      <br>
+
     <% end %>
 <% end %>
 
