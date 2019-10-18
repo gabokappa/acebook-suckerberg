@@ -1,6 +1,8 @@
+<div class="post_edit">
 <%= form_for @post do |form| %>
   <h4><%= form.label :message %></br></h4>
-  <%= form.text_area :message %><br>
+  <%= form.text_area :message %></br>
   <%#= form.hidden_field :wall_id, :value => @post.wall_id %>
   <%= form.submit "Submit" %>
 <% end %>
+</div>
