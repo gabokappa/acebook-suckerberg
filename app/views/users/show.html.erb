@@ -1,5 +1,5 @@
 <h2>Welcome to <%=@user.email %>'s wall</h2>
-<%= image_tag(@user.profile_pic, :size => '80x80') if @user.profile_pic.attached? %>
+<%= image_tag(@user.profile_pic, class: 'img-circle', :size => '80x80') if @user.profile_pic.attached? %>
 <br>
 <% @albums.each do |album| %>
   <%= album.name %>
