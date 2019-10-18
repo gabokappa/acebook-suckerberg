@@ -1,9 +1,3 @@
-<% @users = User.all %>
-<% @users.each do |user| %>
-  <%= user.email %>
-  <%= link_to 'show', user %>
-<% end %>
-
 <h2>Welcome to <%=@user.email %>'s wall</h2>
 <%= image_tag(@user.profile_pic, :size => '80x80') if @user.profile_pic.attached? %>
 <br>

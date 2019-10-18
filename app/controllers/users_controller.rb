@@ -21,4 +21,8 @@ class UsersController < ApplicationController
     @likes_comments = likes_all_comments
     @albums = Album.all.where(user_id: @user.id)
   end
+
+  def list 
+  end 
+
 end
