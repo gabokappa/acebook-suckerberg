@@ -36,6 +36,7 @@ class AlbumsController < ApplicationController
   def update
     if album_authored_by_user?(@album.id)
       @album.update(params.require(:album).permit(:name, :content, pics:[]).merge(user_id: current_user.id))
+      p '--- did update ----'
     else
       flash[:notice] = 'ERROR: only the owner of the album can edit the Album'
     end
