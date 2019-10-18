@@ -14,3 +14,30 @@
  */
 @import "bootstrap-custom";
 
+h2 {
+    background-color: rgb(249, 249, 249);
+    width: 1000px;
+    border: 15px solid rgb(15, 14, 14);
+    padding: 30px;
+    margin: 20px;
+    text-align: center;
+  }
+
+  .user {
+      text-align: center;
+      border-style: solid;
+      border-width: medium;
+      padding: 30px;
+  }
+
+  .friends {
+    text-align: center;
+    padding: 30px;
+    // border-style: solid;
+    // border-width: medium;
+    // border-color: rgb(141, 140, 138);
+    background-image: url("friends.jpeg");
+    background-attachment: fixed;
+    background-position: center;
+    font-size: 400%;
+}

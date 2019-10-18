@@ -1,5 +1,7 @@
+<div class="friends">
 <% @users = User.all %>
 <% @users.each do |user| %>
   <%= user.email %>
   <%= link_to 'show', user %>
 <% end %>
+</div>
