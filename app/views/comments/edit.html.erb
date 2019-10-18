@@ -1,7 +1,7 @@
 <div class="comment_edit">
 <%= form_for @comment do |form| %>
   <h4><%= form.label :message %></br></h4>
-  <%= form.text_area :message %></br>
+  <%= form.text_area :message %><br>
   <%#= form.hidden_field :post_test, :value => @post.id %>
   <%= form.submit "Submit" %>
 <% end %>
