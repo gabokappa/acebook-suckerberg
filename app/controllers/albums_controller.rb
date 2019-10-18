@@ -67,6 +67,8 @@ end
 
   def album_authored_by_user?(params_id)
     @album = Album.find_by(id: params_id)
+    p "------------- #{@album.user_id} -----------------"
+    p "------------- #{current_user.id} -----------------"
     current_user.id == @album.user_id ? true : false
   end
 

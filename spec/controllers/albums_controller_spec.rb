@@ -76,7 +76,7 @@ RSpec.describe AlbumsController, type: :controller do
   end
 
   describe 'POST #create' do
-    login_user
+    # login_user
     context 'with valid params' do
       it 'creates a new Album' do
         expect do
@@ -102,13 +102,18 @@ RSpec.describe AlbumsController, type: :controller do
       end
 
       it 'updates the requested album' do
-        skip do
-          user = FactoryBot.create(:user)
-          sign_in user
-          album = Album.create! valid_attributes.merge(user_id: user.id)
-          put :update, params: {album: album.to_param, name: 'test_change'}, session: valid_session
+        # skip do
+          logout(:user)
+          # @request.env['devise.mapping'] = Devise.mappings[:user]
+          test_user = FactoryBot.create(:user)
+          sign_in test_user
+          album = Album.create! valid_attributes.merge(user_id: test_user.id)
+          # expect(album.name).to eq('testalbum')
+          p "============ #{album.user_id} ==========="
+          p "============ #{test_user.id} ==========="
+          put :update, params: {album: { album_id: album.id, name: 'test_change'} }
           expect(album.name).to eq('test_change')
-        end
+        # end
       end
 
       it 'redirects to the album' do
