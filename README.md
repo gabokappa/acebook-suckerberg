@@ -1,4 +1,4 @@
-#Acebook by team Suckerberg
+# Acebook by team Suckerberg
 
 Contributors:
 - [Eduard Kulcsickij-Gut](https://github.com/EdZeno)
@@ -7,9 +7,37 @@ Contributors:
 - [Valeria Serci](https://github.com/ValeSer)
 - [Volker Bergner](https://github.com/v-c-b)
 
-- intro para on how we setout to do the project
-- how to install and run
+Acebook is a group project where we mimicked some of the functionality present on social media  networks. The backend is built using Ruby on Rails with a PostgreSQL database. You can find a hosted version here: http://ec2-52-57-26-149.eu-central-1.compute.amazonaws.com:3000/
+
+### Local installation
+
+* Clone this repository
+* Run the following commands
+```
+$ bundle install
+$ rails db:create
+$ rails db:migrate
+$ rails db:migrate RAILS_ENV=test
+```
+* Check all the tests are running using ```rspec``` commmand.
+* Run the server using ``` rails server ``` and open your browser to navigate to localhost:3000
+
+### Tech used
+
+- Ruby on rails
+- Devise
+- Bootstrap
+- PostgreSQL
+
+Testing
+ 
+- Rubocop
+- travis
+- capybara
+- rubocop
+
+### Features
+
 - team work approach
-- technologies used
 - learnings(major ones)
-- user stories
+
