@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-feature 'User can delete a comment with a like ', type: :feature do
-  scenario 'Can delete own comments with a like' do
+feature 'Posts', type: :feature do
+  scenario 'Can delete posts with comments' do
     user = FactoryBot.create(:user)
     login_as(user, scope: :user)
     visit '/posts'
@@ -14,7 +14,8 @@ feature 'User can delete a comment with a like ', type: :feature do
     fill_in 'Message', with: 'I am a comment'
     click_button 'Submit'
     click_link( Emoji.find_by_alias('metal').raw .to_s, match: :first)
-    click_link 'Delete comment'
+    click_link 'Delete'
+    expect(page).to have_no_content('Hello, friends!')
     expect(page).to have_no_content('I am a comment')
     expect(page).to have_no_content('ERROR')
   end

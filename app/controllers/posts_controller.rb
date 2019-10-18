@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/posts_helper'
 
 class PostsController < ApplicationController
@@ -5,9 +7,7 @@ class PostsController < ApplicationController
 
   def new
     @user = User.find_by(id: params[:id])
-    if @user == nil
-      @user = current_user
-    end 
+    @user = current_user if @user.nil?
     @post = Post.new
   end
 
@@ -36,7 +36,11 @@ class PostsController < ApplicationController
   end
 
   def update
-    authored_by_user?(params[:id]) ? @post.update(edit_params) : flash[:notice] = "ERROR: only the author can edit the post"
+    if authored_by_user?(params[:id])
+      @post.update(edit_params)
+    else
+      flash[:notice] = 'ERROR: only the author can edit the post'
+    end
     redirect_to user_wall_path(@post.wall_id)
   end
 
@@ -56,7 +60,8 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:message).merge(user_id: current_user.id, wall_id: @wall_id)
+    params.require(:post).permit(:message).merge(user_id: current_user.id,
+                                                 wall_id: @wall_id)
   end
 
   def edit_params
@@ -72,5 +77,4 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params_id)
     current_user.id == @post.wall_id
   end
-
 end

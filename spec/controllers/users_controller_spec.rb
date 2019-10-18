@@ -9,13 +9,15 @@ RSpec.describe UsersController, type: :controller do
           expect(response).to have_http_status(200)
         end
     end
-    # describe "GET /show" do 
-    #     it "displays the users wall" do 
+    # test to create with a a profile picutre?
+    #
+    # describe "GET /show" do
+    #     it "displays the users wall" do
     #         new_user = FactoryBot.create(:user)
 
     #         login_as(new_user, scope: :new_user)
     #          userswall_path
     #         page.should have_content(user.email)
-    #     end 
+    #     end
     # end
 end
