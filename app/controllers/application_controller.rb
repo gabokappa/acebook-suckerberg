@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
@@ -5,11 +6,11 @@ class ApplicationController < ActionController::Base
   respond_to :html, :json
 
 
-  def after_sign_in_path_for(user)
+  def after_sign_in_path_for(_user)
     userswall_path
   end
 
-  def after_update_path_for(user)
+  def after_update_path_for(_user)
     userswall_path
   end
 
@@ -18,10 +19,12 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:profile_pic, :email, :password, :password_confirmation)}
+    devise_parameter_sanitizer.permit(:sign_up) do |u|
+      u.permit(:profile_pic, :email, :password, :password_confirmation)
+    end
 
-    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:profile_pic, :email, :password, :password_confirmation)}
+    devise_parameter_sanitizer.permit(:account_update) do |u|
+      u.permit(:profile_pic, :email, :password, :password_confirmation)
+    end
   end
-
-
 end

@@ -8,6 +8,8 @@ FactoryBot.define do
 
   factory :like do
     liked { 1 }
+    post_id { FactoryBot.create(:post).id }
+    user_id { FactoryBot.create(:user).id }
   end
 
   factory :comment do

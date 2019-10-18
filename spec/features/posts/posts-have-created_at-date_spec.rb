@@ -1,14 +1,17 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-feature 'Timeline', type: :feature do
-  scenario 'Can submit posts and view them' do
+feature 'Posts', type: :feature do
+  scenario 'shows the date' do
     user = FactoryBot.create(:user)
     login_as(user, scope: :user)
+    Timecop.freeze
+    t = Time.now
     visit '/posts'
     click_link 'New post'
     fill_in 'Message', with: 'Hello, world!'
     click_button 'Submit'
-    expect(page).to have_content('Hello, world!')
+    expect(page).to have_content(t.strftime(':%M'))
+    Timecop.return
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-feature 'User can delete comment ', type: :feature do
+feature 'Comments', type: :feature do
   scenario 'Can delete own comments' do
     user = FactoryBot.create(:user)
     login_as(user, scope: :user)

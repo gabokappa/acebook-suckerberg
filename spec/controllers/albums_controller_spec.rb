@@ -26,16 +26,8 @@ require 'rails_helper'
 
 RSpec.describe AlbumsController, type: :controller do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Album. As you add validations to Album, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
-  end
-
-  let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
-  end
+  let(:valid_attributes) {{name: 'testalbum'}}
+  let(:invalid_attributes) {{date: 'testalbum'}}
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -45,7 +37,8 @@ RSpec.describe AlbumsController, type: :controller do
   describe 'GET #index' do
     login_user
     it 'returns a success response' do
-      Album.create! valid_attributes.merge(user_id: current_user.id)
+      user = FactoryBot.create(:user)
+      Album.create! valid_attributes.merge(user_id: user.id)
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end
@@ -54,7 +47,8 @@ RSpec.describe AlbumsController, type: :controller do
   describe 'GET #show' do
     login_user
     it 'returns a success response' do
-      album = Album.create! valid_attributes
+      user = FactoryBot.create(:user)
+      album = Album.create! valid_attributes.merge(user_id: user.id)
       get :show, params: {id: album.to_param}, session: valid_session
       expect(response).to be_successful
     end
@@ -63,17 +57,21 @@ RSpec.describe AlbumsController, type: :controller do
   describe 'GET #new' do
     login_user
     it 'returns a success response' do
-      get :new, params: {}, session: valid_session
+      get :new, params: {name: 'test'}, session: valid_session
       expect(response).to be_successful
     end
   end
 
   describe 'GET #edit' do
-    login_user
-    it 'returns a success response' do
-      album = Album.create! valid_attributes
-      get :edit, params: {id: album.to_param}, session: valid_session
-      expect(response).to be_successful
+    skip do
+      login_user
+      it 'returns a success response' do
+        user = FactoryBot.create(:user)
+        sign_in user
+        album = Album.create! valid_attributes.merge(user_id: user.id)
+        get :edit, params: {album: album.to_param, name: 'test_change'}, session: valid_session
+        expect(album.name).to eq('test_change')
+      end
     end
   end
 
@@ -87,44 +85,46 @@ RSpec.describe AlbumsController, type: :controller do
       end
       it 'redirects to the created album' do
         post :create, params: {album: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Album.last)
+        expect(response).to redirect_to('/')
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {album: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response).to_not be_successful
       end
     end
-  end
-
-  describe 'PUT #update' do
-    login_user
-    context 'with valid params' do
-      let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+    describe 'PUT #update' do
+      login_user
+      context 'with valid params' do
+        let(:new_attributes) {{name: 'test_change'}}
       end
 
       it 'updates the requested album' do
-        album = Album.create! valid_attributes
-        put :update, params: {id: album.to_param, album: new_attributes}, session: valid_session
-        album.reload
-        skip('Add assertions for updated state')
+        skip do
+          user = FactoryBot.create(:user)
+          sign_in user
+          album = Album.create! valid_attributes.merge(user_id: user.id)
+          put :update, params: {album: album.to_param, name: 'test_change'}, session: valid_session
+          expect(album.name).to eq('test_change')
+        end
       end
 
       it 'redirects to the album' do
-        album = Album.create! valid_attributes
+        user = FactoryBot.create(:user)
+        album = Album.create! valid_attributes.merge(user_id: user.id)
         put :update, params: {id: album.to_param, album: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(album)
+        expect(response).to redirect_to('/')
       end
     end
 
     context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        album = Album.create! valid_attributes
+      it "throws an error)" do
+        user = FactoryBot.create(:user)
+        album = Album.create! valid_attributes.merge(user_id: user.id)
         put :update, params: {id: album.to_param, album: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response).not_to be_successful
       end
     end
   end
@@ -132,17 +132,30 @@ RSpec.describe AlbumsController, type: :controller do
   describe 'DELETE #destroy' do
     login_user
     it 'destroys the requested album' do
-      album = Album.create! valid_attributes
-      expect do
-        delete :destroy, params: {id: album.to_param}, session: valid_session
-      end.to change(Album, :count).by(-1)
+      logout(:user)
+      user = FactoryBot.create(:user)
+      sign_in user
+      album = Album.create! valid_attributes.merge(user_id: user.id)
+      delete :destroy, params: {album_id: album.id, album: album.to_param, id: album.id, user_id: user.id}, session: valid_session
+      expect(Album.count).to eq 0
     end
 
-    it 'redirects to the albums list' do
-      album = Album.create! valid_attributes
+    it 'redirects to root' do
+      user = FactoryBot.create(:user)
+      album = Album.create! valid_attributes.merge(user_id: user.id)
       delete :destroy, params: {id: album.to_param}, session: valid_session
-      expect(response).to redirect_to(albums_url)
+      expect(response).to redirect_to('/')
+    end
+    it 'deletes the pic' do
+      skip do
+        user = FactoryBot.create(:user)
+        sign_in user
+        album = Album.create! valid_attributes.merge(user_id: user.id)
+        album.pics.fixture_file_upload "#{::Rails.root}/cat.jpeg", 'image/jpg'
+        expect(album.pics.attached?).to eq(true)
+        get :destroy_pic, params: {album_id: album.id, user_id: user.id}, session: valid_session
+        expect(album.pics.attached?).to eq(false)
+      end
     end
   end
-
 end
