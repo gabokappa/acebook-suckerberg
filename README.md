@@ -49,4 +49,4 @@ Please see the various pages in the [wiki](https://github.com/gabokappa/acebook-
 - Users can post, edit that post, delete a post and like the post.
 - Users can comment on a post, edit, delete and like that comment.
 - Users have seperate 'walls' other users can post on those walls.
-- Users have a profile picture.
+- Users have a profile picture and can add albums.
