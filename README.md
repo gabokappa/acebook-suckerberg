@@ -39,6 +39,10 @@ Testing
 - Timecop
 - Simplecov 
 
+### Learnings
+
+Please see the various pages in the [wiki](https://github.com/gabokappa/acebook-suckerberg/wiki)
+
 ### Features
 
 - team work approach
