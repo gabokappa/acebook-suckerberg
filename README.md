@@ -1,5 +1,7 @@
 # Acebook by team Suckerberg
 
+[![Build Status](https://travis-ci.com/gabokappa/acebook-suckerberg.svg?branch=master)](https://travis-ci.com/gabokappa/acebook-suckerberg)
+
 Contributors:
 - [Eduard Kulcsickij-Gut](https://github.com/EdZeno)
 - [Gabriel Gonzalez](https://github.com/gabokappa)
@@ -30,7 +32,7 @@ $ rails db:migrate RAILS_ENV=test
 - PostgreSQL
 - ActiveRecord
 
-Testing
+### Testing
 
 - Rubocop
 - Travis
