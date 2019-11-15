@@ -32,6 +32,13 @@ $ rails db:migrate RAILS_ENV=test
 - PostgreSQL
 - ActiveRecord
 
+## Technologies Used
+| Technology | Description | Use |
+| :--------------------------------: | :--------------------------------: | :--------------------------------: |
+| Rails | Web app framework | MVC framework|
+| RSpec | Ruby test framework  | Test Rails models and controllers |
+| RuboCop | Ruby linter | Maintain Ruby code quality |
+
 ### Testing
 
 - Rubocop
