@@ -24,29 +24,22 @@ $ rails db:migrate RAILS_ENV=test
 * Check all the tests are running using ```rspec``` commmand.
 * Run the server using ``` rails server ``` and open your browser to navigate to localhost:3000
 
-### Tech used
-
-- Ruby on rails
-- Devise
-- Bootstrap
-- PostgreSQL
-- ActiveRecord
-
 ## Technologies Used
 | Technology | Description | Use |
 | :--------------------------------: | :--------------------------------: | :--------------------------------: |
+| ActiveRecord | Library for relational SQL databases | Object Relational Mapping|
+| Bootstrap | CSS framework | CSS template and responsive design|
+| Capybara | Testting framework | Feature tests|
+| Devise | Authentication solution | User authentication|
+| Factorybot | Factory library | Test fixtures|
+| PostgreSQL | Object-relational database system | Store app data|
 | Rails | Web app framework | MVC framework|
-| RSpec | Ruby test framework  | Test Rails models and controllers |
-| RuboCop | Ruby linter | Maintain Ruby code quality |
+| RSpec | Ruby test framework  | Test Rails models and controllers|
+| RuboCop | Ruby linter | Maintain Ruby code quality|
+| Simplecov | code coverage library | Gathers code coverage|
+| Timecop | Ruby gem | Test time-dependent code|
+| Travis | Continuous integration service |Ensure pull requests don't break deployed code|
 
-### Testing
-
-- Rubocop
-- Travis
-- Capybara
-- FactoryBot
-- Timecop
-- Simplecov 
 
 ### Learnings
 
